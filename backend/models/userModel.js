@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema({
     username: String,
@@ -7,20 +8,14 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre('save', async function (next) {
     try {
-        const existingUser = await mongoose.models.User.findOne({
-            username: this.username
-        })
-        if (existingUser) {
-            const err = new Error('User with this username is aldready exists.')
-            err.statusCode = 400
-            return next(err)
-        }
+        const salt = await bcrypt.genSalt(10)
+        this.password = await bcrypt.hash(this.password, salt)
         next()
-
-    } catch (err) {
-        next(err)
+    } catch (error) {
+        next(error)
     }
 })
 
 
-export const User = new mongoose.model("User", userSchema)
+const User = new mongoose.model("User", userSchema)
+export default User

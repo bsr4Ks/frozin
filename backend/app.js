@@ -1,36 +1,27 @@
 import express from 'express'
 import { connectDb } from './db.js'
-import { User } from './models/userModel.js'
-// import { configDotenv } from 'dotenv'
+
+
+import authRoutes from "./routes/authRoutes.js"
+
+
 
 const app = express()
 const port = 3000
 
-// configDotenv()
+// middleware to parse json
+app.use(express.json())
 
 // connect to MongoDb
 connectDb()
 
 
 app.get("/", (req, res) => {
-    const user_1 = new User({
-        username: "username1",
-        password: "password1"
-    })
-    try {
-        user_1.save()
-        res.send(`${user_1.username} is added.`)
-    } catch (error) {
-        res.send(`${error}`)
-    }
-    
-
-    
+    res.send("hello from frozen api!")
 })
 
+app.use("/api/auth", authRoutes)
 
-const callback = () => {
-    console.log(`listening on port ${port}`);
-}
-
-app.listen(port, callback)
+app.listen(port, () => {
+    console.log(`listening on port ${port}`)
+})
