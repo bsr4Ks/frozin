@@ -7,21 +7,21 @@ configDotenv()
 
 export const registerUser = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
-    if (!username || !password) {
-      return res.status(400).json({ error: 'Both username and password are required' });
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Both email and password are required' });
     }
 
-    const user = await User.findOne({username: username})
-    console.log(user);
+    const user = await User.findOne({email: email})
+    //console.log(user);
 
     if (user) {
-      return res.status(400).json({error: 'Username already exists.'})
+      return res.status(400).json({error: 'email already exists.'})
     }
     
     const newUser = new User({
-      username: username,
+      email: email,
       password: password
     })
     
