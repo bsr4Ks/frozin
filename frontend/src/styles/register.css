@@ -1,0 +1,39 @@
+.register-main {
+    overflow: hidden;
+}
+
+.register-part1 {
+    position: fixed;
+    z-index: -1;
+    top: -100px;
+    left: -100px;
+    width: 800px;
+    height: 1000px;
+    transform: rotate(-20deg);
+    background-color: rgb(25, 24, 24);
+}
+
+.register-section1 {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.register-form {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.register-form button {
+    width: 200px;
+    margin: 20px auto;
+}
+
+
+.register-text {
+    color: white;
+    margin: 0 auto;;
+}
