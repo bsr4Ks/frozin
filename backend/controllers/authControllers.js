@@ -19,16 +19,34 @@ export const registerUser = async (req, res) => {
     if (user) {
       return res.status(400).json({error: 'email already exists.'})
     }
+    //Şifre hashleme
+    const salt= await bcrypt.genSalt(10)
+    const hashedPassword=await bcrypt.hash(password, salt)
     
     const newUser = new User({
       email: email,
-      password: password
-    })
+      password: hashedPassword
+    });
     
-    newUser.save()
-    
+    await newUser.save()
+
+    //JWT tekrar login yapmadan giriş için
+    const token=jwt.sign(
+      {id: newUser._id, email: newUser.email},
+      process.env.JWT_TOKEN ,
+      {expiresIn: '7d'}
+    );
+
     // For now, just echo back the data
-    return res.status(200).json({ message: 'Registered', data: req.body });
+    //return res.status(200).json({ message: 'Registered', data: req.body });
+    return res.status(201).json({ 
+      message: 'Registered successfully', 
+      token,
+      user: {
+        id: newUser._id,
+        email: newUser.email
+      }
+    });
 
   } catch (error) {
     return res.status(500).json({ error: 'Something went wrong', details: error.message });
@@ -37,13 +55,13 @@ export const registerUser = async (req, res) => {
 
 export const loginUser = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body; //username idi?
 
-    if (!username || !password) {
-      return res.status(400).json({ error: 'Both username and password are required' });
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Both email and password are required' });
     }
 
-    const user = await User.findOne({ username }); 
+    const user = await User.findOne({ email });
 
     if (!user) {
       return res.status(401).json({ error: 'No user exists. Please register first.' });
@@ -57,12 +75,12 @@ export const loginUser = async (req, res) => {
     //  User is authenticated
 
     const token = jwt.sign(
-      { id: user._id, username: user.username },
+      { id: user._id, email: user.email },
       process.env.JWT_TOKEN,
-      { expiresIn: '1h' }
+      { expiresIn: '7d' }
     );
 
-    return res.status(200).json({ message: 'Login successful', token });
+    return res.status(200).json({ message: 'Login successful', token, user: { id: user._id, email: user.email } });
 
   } catch (error) {
     return res.status(500).json({ error: 'Something went wrong', details: error.message });

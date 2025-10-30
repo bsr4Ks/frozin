@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import { connectDb } from './db.js'
@@ -9,7 +10,7 @@ const origin= "http://localhost:3001"
 
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 // middleware to parse json
 app.use(express.json())
@@ -26,6 +27,16 @@ app.get("/", (req, res) => {
 
 app.use("/api/auth", authRoutes)
 
-app.listen(port, () => {
-    console.log(`listening on port ${port}`)
-})
+//db e bağlandıktan sonra server ı başlat
+async function startServer() {
+    try { console.log("Connecting to database...") 
+    await connectDb()
+    console.log("mongodb connected")
+    app.listen(port, () => {console.log(`listening on port ${port}`)})
+    } catch (error) {
+        console.error("Failed to start server:", error)
+    process.exit(1)
+    }
+}
+
+startServer()

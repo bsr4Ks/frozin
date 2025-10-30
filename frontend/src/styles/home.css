@@ -1,12 +1,15 @@
-
 .home-body {
     background-image: linear-gradient(rgba(0, 0, 79, 0.668), rgba(49, 0, 31, 0.619)), url("https://tinder.com/static/build/5921afb1c3e6673d31a79697175df491.webp");
     background-size: cover;
-    height: 100vh;
-    position: fixed;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
     width: 100%;
-    top: 0;
-    z-index: -1;
+}
+
+main {
+    min-height: 200vh;
+    position: relative;
 }
 
 header {
@@ -15,14 +18,16 @@ header {
     background-color: rgba(0, 0, 0, 0.347);
     position: fixed;
     top: 0;
+    z-index: 10;
 }
 
 .banner {
-    flex-grow: 1;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 40px;
 }
 
 @keyframes anim1 {
@@ -38,11 +43,14 @@ header {
     text-shadow: 0 6px black;
     letter-spacing: 0px;
     text-align: center;
-    /* animation: anim1;
-    animation-duration: 3s;
-    animation-iteration-count: infinite; */
 }
+
 .banner .button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
     padding: 5px;
     height: 50px;
     width: 250px;
@@ -53,12 +61,11 @@ header {
     color: white;
     outline: 0;
     cursor: pointer;
-    transition: 0.5s;
+    transition: background-color 0.5s;
 }
 
 .banner .button:hover {
     background-color: black;
-    transition: 1s;
 }
 
 .banner .button .part {
@@ -66,69 +73,153 @@ header {
     align-items: center;
     justify-content: center;
     font-size: 30px;
-    left: 0;
-    top: -35px;
-    position: relative;
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 50px;
-    height: 100%;
+    height: 50px;
     background-color: rgb(38, 41, 41);
-    color: black;
+    color: white;
     border-radius: 50%;
-    transition: 0.5s;
+    transition: left 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
 }
 
 .banner .button:hover .part {
-    left: 200px;
-    transition: 0.5s;
-}
-
-.banner .button .text {
-    font-size: 20px;
-    visibility: hidden;
-    margin-top: 10px;
-    margin-left: 20px;
-    letter-spacing: 2px;
-}
-
-.banner .button:hover .text {
-    visibility: visible;
-    transition: 0.1;
-    transition-delay: 0.5s;
+    left: 195px;
 }
 
 .banner .button .part p {
-    margin-bottom:7px;
+    margin: 0;
+    line-height: 1;
 }
 
+.banner .button .text {
+    position: absolute;
+    left: 20px;
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: white;
+    white-space: nowrap;
+    z-index: 1;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.banner .button:hover .text {
+    clip-path: inset(0 0% 0 0);
+}
 
 .home-section1 {
     min-height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .home-section2 {
-    height: 100vh;
-    background: linear-gradient(rgb(23, 22, 22) 90%, rgba(49, 0, 31));
+    min-height: 100vh;
+    background: linear-gradient(rgb(23, 22, 22) 0%, rgb(15, 15, 15) 100%);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
+    gap: 50px;
     color: white;
+    padding: 80px 50px;
+    position: relative;
 }
+
 .home2 {
     height: 70%;
-    margin: 0 auto;
-    
+    max-height: 600px;
+    opacity: 0;
+    transform: translateY(150px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 }
+
+.home2.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .home2 img{
     height: 100%;
+    width: auto;
     border: 1px solid rgb(81, 68, 68);
     border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
+
 .home-section2 .text {
-    margin: 0 auto;
     max-width: 600px;
-    font-size: larger;
+    font-size: 1.2rem;
     text-align: justify;
+    opacity: 0;
+    transform: translateY(150px);
+    transition: opacity 1.2s ease-out 0.3s, transform 1.2s ease-out 0.3s;
+}
+
+.home-section2 .text h2 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #5cd3a2, #32a852);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.home-section2 .text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.homelogin {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.homelogin:hover {
+    background-color: black;
+    border-color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .home-section2 {
+        flex-direction: column;
+        padding: 60px 30px;
+    }
+    
+    .home2 {
+        height: 50%;
+    }
+    
+    .banner h1 {
+        font-size: 60px;
+    }
+}
+
+@media (max-width: 768px) {
+    .banner h1 {
+        font-size: 48px;
+    }
+    
+    .home-section2 .text h2 {
+        font-size: 2rem;
+    }
 }
