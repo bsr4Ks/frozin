@@ -19,16 +19,13 @@ export const registerUser = async (req, res) => {
     if (user) {
       return res.status(400).json({error: 'email already exists.'})
     }
-    //Şifre hashleme
-    const salt= await bcrypt.genSalt(10)
-    const hashedPassword=await bcrypt.hash(password, salt)
     
     const newUser = new User({
       email: email,
-      password: hashedPassword
+      password: password
     });
     
-    await newUser.save()
+    newUser.save()  // save'de şifre hashleniyor
 
     //JWT tekrar login yapmadan giriş için
     const token=jwt.sign(
@@ -37,8 +34,6 @@ export const registerUser = async (req, res) => {
       {expiresIn: '7d'}
     );
 
-    // For now, just echo back the data
-    //return res.status(200).json({ message: 'Registered', data: req.body });
     return res.status(201).json({ 
       message: 'Registered successfully', 
       token,
@@ -63,11 +58,19 @@ export const loginUser = async (req, res) => {
 
     const user = await User.findOne({ email });
 
+    console.log(user);
+    
+
     if (!user) {
       return res.status(401).json({ error: 'No user exists. Please register first.' });
     }
 
+    console.log(password);
+    console.log(user.password);
+    
     const isMatch = await bcrypt.compare(password, user.password); // compare hashed password
+    console.log(isMatch);
+    
     if (!isMatch) {
       return res.status(401).json({ error: 'Incorrect password' });
     }

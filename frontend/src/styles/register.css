@@ -1,26 +1,24 @@
-/* Genel sayfa arka planı */
-body, html {
-    height: 100%;
-    margin: 0;
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-    overflow-x: hidden;
-}
-
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
+.register-body {
+    /* background: linear-gradient(rgb(16, 1, 22) 10%, rgb(23, 23, 22)); */
+   background-color: #191919;
+   height: 100vh;;
+}
+
+.register-nav {
+    background: linear-gradient(rgb(14, 15, 12), 70%, rgba(141, 82, 203, 0.373));
+}
 /* Arka plan dekoratif şekiller */
 .register-part1 {
     position: fixed;
     z-index: 0;
-    top: -150px;
-    left: -150px;
+    top: 0px;
+    left: 0px;
     width: 600px;
     height: 600px;
     border-radius: 50%;
@@ -47,235 +45,11 @@ body, html {
     50% { transform: translateY(-30px) rotate(5deg); }
 }
 
-/* Main container */
-.register-main {
-    min-height: 100vh;
+.register-form {
+    height: 100%;
     display: flex;
-    flex-direction: column;
-    position: relative;
-    z-index: 1;
-}
-
-/* Form section - center aligned */
-.register-section1 {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px 20px;
-    gap: 30px;
+    padding-top: 50px;
 }
 
-/* Başlık metni */
-.register-text {
-    color: #ffffff;
-    text-align: center;
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    text-shadow: 0 2px 20px rgba(92, 211, 162, 0.3);
-    letter-spacing: -0.5px;
-}
-
-/* Form kutusu - glassmorphism */
-.register-form {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 450px;
-    padding: 45px 40px;
-    border-radius: 24px;
-    background: rgba(30, 30, 47, 0.7);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 
-        0 8px 32px rgba(0, 0, 0, 0.3),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    color: #e0e0e0;
-    position: relative;
-    overflow: hidden;
-}
-
-.register-form::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, #5cd3a2, transparent);
-    animation: borderLight 3s linear infinite;
-}
-
-@keyframes borderLight {
-    0% { left: -100%; }
-    100% { left: 100%; }
-}
-
-.register-form h2 {
-    margin: 0 0 30px 0;
-    font-size: 28px;
-    font-weight: 700;
-    text-align: center;
-    background: linear-gradient(135deg, #5cd3a2, #32a852);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* Label styling */
-.register-form label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    color: #b0b0b0;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* Input styling */
-.register-form input {
-    width: 100%;
-    padding: 14px 16px;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    background: rgba(37, 37, 53, 0.6);
-    color: #ffffff;
-    font-size: 15px;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
-}
-
-.register-form input::placeholder {
-    color: #666;
-}
-
-.register-form input:focus {
-    outline: none;
-    border-color: #5cd3a2;
-    background: rgba(37, 37, 53, 0.9);
-    box-shadow: 
-        0 0 0 4px rgba(92, 211, 162, 0.1),
-        0 4px 12px rgba(92, 211, 162, 0.2);
-    transform: translateY(-2px);
-}
-
-/* Error message */
-.error-message {
-    color: #ff6b6b;
-    font-size: 14px;
-    margin: -10px 0 15px 0;
-    padding: 10px;
-    background: rgba(255, 107, 107, 0.1);
-    border-left: 3px solid #ff6b6b;
-    border-radius: 6px;
-}
-
-/* Button styling - modern gradient */
-.register-form button {
-    width: 100%;
-    margin: 10px 0;
-    padding: 15px;
-    border-radius: 12px;
-    border: none;
-    cursor: pointer;
-    background: linear-gradient(135deg, #5cd3a2, #32a852);
-    color: #fff;
-    font-weight: 700;
-    font-size: 16px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(92, 211, 162, 0.3);
-    position: relative;
-    overflow: hidden;
-}
-
-.register-form button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.5s;
-}
-
-.register-form button:hover::before {
-    left: 100%;
-}
-
-.register-form button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(92, 211, 162, 0.4);
-}
-
-.register-form button:active {
-    transform: translateY(0);
-}
-
-/* Already have account link */
-.already-have-an-account {
-    color: #b0b0b0;
-    text-align: center;
-    font-size: 15px;
-    margin-top: 20px;
-}
-
-.already-have-an-account a {
-    color: #5cd3a2;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.already-have-an-account a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #5cd3a2;
-    transition: width 0.3s ease;
-}
-
-.already-have-an-account a:hover::after {
-    width: 100%;
-}
-
-.already-have-an-account a:hover {
-    color: #32a852;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    .register-text {
-        font-size: 24px;
-        padding: 0 20px;
-    }
-    
-    .register-form {
-        padding: 35px 25px;
-        max-width: 90%;
-    }
-    
-    .register-form h2 {
-        font-size: 24px;
-    }
-}
-
-@media (max-width: 480px) {
-    .register-text {
-        font-size: 20px;
-    }
-    
-    .register-form {
-        padding: 30px 20px;
-    }
-}

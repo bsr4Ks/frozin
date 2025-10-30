@@ -1,37 +1,28 @@
 .home-body {
     background-image: linear-gradient(rgba(0, 0, 79, 0.668), rgba(49, 0, 31, 0.619)), url("https://tinder.com/static/build/5921afb1c3e6673d31a79697175df491.webp");
     background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: -1;
+}
+.home-section1 {
     min-height: 100vh;
     width: 100%;
+    display: flex;
+    place-content: center;
 }
-
-main {
-    min-height: 200vh;
-    position: relative;
-}
-
-header {
-    height: 80px;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.347);
-    position: fixed;
-    top: 0;
-    z-index: 10;
+.home-nav {
+    background: linear-gradient(rgb(0, 0, 0), 30%, rgba(22, 3, 44, 0.34));
 }
 
 .banner {
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 40px;
-}
-
-@keyframes anim1 {
-    50% {top: -30px;}
+    gap: 50px;
 }
 
 .banner h1 {
@@ -45,27 +36,36 @@ header {
     text-align: center;
 }
 
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .banner .button {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     overflow: hidden;
-    padding: 5px;
-    height: 50px;
+    height: 60px;
     width: 250px;
     font-size: 20px;
     font-weight: 700;
     border-radius: 40px;
-    background-color: rgb(18, 0, 49);
+    background: linear-gradient(-45deg, #ff6b6b, #f7d794, #70a1ff, #2ed573);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
     color: white;
     outline: 0;
     cursor: pointer;
     transition: background-color 0.5s;
-}
-
-.banner .button:hover {
-    background-color: black;
 }
 
 .banner .button .part {
@@ -95,12 +95,14 @@ header {
     line-height: 1;
 }
 
+
+
 .banner .button .text {
     position: absolute;
     left: 20px;
     font-size: 20px;
     letter-spacing: 2px;
-    color: white;
+    color: rgb(3, 3, 3);
     white-space: nowrap;
     z-index: 1;
     clip-path: inset(0 100% 0 0);
@@ -111,53 +113,38 @@ header {
     clip-path: inset(0 0% 0 0);
 }
 
-.home-section1 {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
 
 .home-section2 {
-    min-height: 100vh;
-    background: linear-gradient(rgb(23, 22, 22) 0%, rgb(15, 15, 15) 100%);
+    height: 100vh;
+    background: linear-gradient(rgb(23, 22, 22) 0%, rgb(38, 1, 42) 100%);
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    gap: 50px;
+    justify-content: space-between;
     color: white;
-    padding: 80px 50px;
-    position: relative;
 }
 
 .home2 {
+    margin: 0 auto;
     height: 70%;
-    max-height: 600px;
     opacity: 0;
-    transform: translateY(150px);
+    transform: translateY(20px);
     transition: opacity 1.2s ease-out, transform 1.2s ease-out;
-}
-
-.home2.visible {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .home2 img{
     height: 100%;
-    width: auto;
     border: 1px solid rgb(81, 68, 68);
     border-radius: 20px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
 }
 
 .home-section2 .text {
-    max-width: 600px;
+    max-width: 700px;
+    margin: 0 auto;
     font-size: 1.2rem;
     text-align: justify;
     opacity: 0;
-    transform: translateY(150px);
+    transform: translateY(200px);
     transition: opacity 1.2s ease-out 0.3s, transform 1.2s ease-out 0.3s;
 }
 
@@ -170,32 +157,9 @@ header {
     background-clip: text;
 }
 
-.home-section2 .text.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.homelogin {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 12px 28px;
-    font-size: 16px;
-    font-weight: 600;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 100;
-}
-
-.homelogin:hover {
-    background-color: black;
-    border-color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+.visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
 }
 
 /* Responsive */

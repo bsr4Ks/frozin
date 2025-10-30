@@ -14,11 +14,11 @@ export function Home() {
             const section2 = document.querySelector('.home-section2');
             const home2Element = document.querySelector('.home2');
             const textElement = document.querySelector('.home-section2 .text');
-            
+
             if (section2 && home2Element && textElement) {
                 const section2Top = section2.getBoundingClientRect().top;
                 const windowHeight = window.innerHeight;
-                
+
                 // Eğer section2 ekranın %70'ine geldiyse animasyonu tetikle
                 if (section2Top < windowHeight * 0.7) {
                     home2Element.classList.add('visible');
@@ -37,9 +37,8 @@ export function Home() {
 
     return <div>
         <div className="home-body"></div>
-        <main>
+        <main> <NavBar className="home-nav"/>
             <div className="home-section1">
-                <header><NavBar /></header>
                 <div className="banner">
                     <h1>Eşiniz ve frozin</h1>
                     <div className="button" onClick={() => navigate("/register")}>
@@ -48,7 +47,6 @@ export function Home() {
                     </div>
                 </div>
             </div>
-            <button className="homelogin" onClick={() => navigate("/login")}>Login</button>
             <div className="home-section2">
                 <div className="home2"><img src={home2} alt="Frozin character" /></div>
                 <div className="text">

@@ -1,0 +1,220 @@
+.lr-form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Başlık metni */
+.lr-text {
+    color: #ffffff;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    text-shadow: 0 2px 20px rgba(14, 14, 14, 0.3);
+    letter-spacing: -0.5px;
+}
+
+/* Form kutusu - glassmorphism */
+.lr-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 450px;
+    min-width: 400px;
+    padding: 45px 40px;
+    border-radius: 24px;
+    background: rgba(30, 30, 47, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+    position: relative;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.lr-form ::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #5cd3a2, transparent);
+    animation: borderLight 3s linear infinite;
+}
+
+@keyframes borderLight {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.lr-form  h2 {
+    margin: 0 0 30px 0;
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    background: linear-gradient(135deg, #5cd3a2, #32a852);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Label styling */
+.lr-form  label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #b0b0b0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Input styling */
+.lr-form  input {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(37, 37, 53, 0.6);
+    color: #ffffff;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.lr-form  input::placeholder {
+    color: #666;
+}
+
+.lr-form  input:focus {
+    outline: none;
+    border-color: #5cd3a2;
+    background: rgba(37, 37, 53, 0.9);
+    box-shadow: 
+        0 0 0 4px rgba(92, 211, 162, 0.1),
+        0 4px 12px rgba(92, 211, 162, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Error message */
+.lr-form .error-message {
+    color: #ff6b6b;
+    font-size: 14px;
+    margin: -10px 0 15px 0;
+    padding: 10px;
+    background: rgba(255, 107, 107, 0.1);
+    border-left: 3px solid #ff6b6b;
+    border-radius: 6px;
+}
+
+/* Button styling - modern gradient */
+.lr-form  button {
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(135deg, #5cd3a2, #32a852);
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(92, 211, 162, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.lr-form  button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.lr-form button:hover::before {
+    left: 100%;
+}
+
+.lr-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(92, 211, 162, 0.4);
+}
+
+.lr-form button:active {
+    transform: translateY(0);
+}
+
+
+.lr-subtle-text {
+    color: #b0b0b0;
+    text-align: center;
+    font-size: 15px;
+}
+
+.lr-subtle-text a {
+    color: #5cd3a2;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.lr-subtle-text a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #5cd3a2;
+    transition: width 0.3s ease;
+}
+
+.lr-subtle-text a:hover::after {
+    width: 100%;
+}
+
+.lr-subtle-text a:hover {
+    color: #32a852;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .lr-text {
+        font-size: 24px;
+        padding: 0 20px;
+    }
+    
+    .lr-form  {
+        padding: 35px 25px;
+        max-width: 90%;
+    }
+    
+    .lr-form h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .lr-text {
+        font-size: 20px;
+    }
+    
+    .lr-form {
+        padding: 30px 20px;
+    }
+}
